@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 echo "Checking out source code"
-                git 'https://github.com/sairam-swamy/maventomcatsnakes'
+                git 'https://github.com/Heena-j24/tomcatdevops'
                 sh 'cp -r * /var/lib/jenkins/efs'
             }
         }
@@ -37,9 +37,9 @@ pipeline {
                     cd /home/jenkins/workspace
                     ls -al
                     docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
-                    aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/v0a8o2u0
-                    docker tag ${IMAGE_NAME}:${IMAGE_TAG} public.ecr.aws/v0a8o2u0/mindtree:latest
-                    docker push public.ecr.aws/v0a8o2u0/mindtree:latest
+                    aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 957172857669.dkr.ecr.ap-south-1.amazonaws.com
+                    docker tag mindtree:latest 957172857669.dkr.ecr.ap-south-1.amazonaws.com/mindtree:latest
+                    docker push 957172857669.dkr.ecr.ap-south-1.amazonaws.com/mindtree:latest
                 '''
             }
         }
@@ -58,3 +58,4 @@ pipeline {
     }
 
 }
+
